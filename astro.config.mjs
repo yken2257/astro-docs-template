@@ -3,15 +3,20 @@ import tailwind from '@astrojs/tailwind';
 import rehypeSlug from 'rehype-slug';
 import rehypeExternalLinks from 'rehype-external-links';
 
+import mdx from "@astrojs/mdx";
+
 // https://astro.build/config
 export default defineConfig({
-	integrations: [tailwind()],
+  integrations: [tailwind(), mdx()],
+  build: {
+    format: 'directory'
+  },
   markdown: {
-		remarkPlugins: [],
-		rehypePlugins: [
-			rehypeSlug,
-			[rehypeExternalLinks, {rel: ['noopener', 'noreferrer'], target: '_blank'}]
-		],
+    remarkPlugins: [],
+    rehypePlugins: [rehypeSlug, [rehypeExternalLinks, {
+      rel: ['noopener', 'noreferrer'],
+      target: '_blank'
+    }]],
     shikiConfig: {
       // Choose from Shiki's built-in themes (or add your own)
       // https://github.com/shikijs/shiki/blob/main/docs/themes.md
@@ -21,7 +26,7 @@ export default defineConfig({
       // https://github.com/shikijs/shiki/blob/main/docs/languages.md
       langs: [],
       // Enable word wrap to prevent horizontal scrolling
-      wrap: true,
-    },
-  },
+      wrap: true
+    }
+  }
 });

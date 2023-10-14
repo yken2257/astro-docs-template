@@ -1,0 +1,10 @@
+---
+import { createTree } from "../utils";
+import RecursiveTreeWithDetails from "./RecursiveTreeWithDetails.astro";
+
+const urls: string[] = Astro.props.urls;
+const tree = createTree(urls);
+---
+<ul>
+    <RecursiveTreeWithDetails node={tree} basePath="" />
+</ul>

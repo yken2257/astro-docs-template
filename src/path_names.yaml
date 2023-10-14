@@ -1,0 +1,24 @@
+- slug: tutorial
+  text: チュートリアル
+  items:
+    - slug: index.html
+    - slug: feature_a
+      text: 特徴A
+      items:
+        - slug: overview
+        - slug: step1
+    - slug: note
+
+- slug: manual
+  text: マニュアル
+  items:
+    - slug: index.html
+    - slug: function_b
+      text: 機能B
+      items:
+        - slug: index.html
+        - slug: component_1
+          text: 要素1
+          items:
+            - slug: index.html
+            - slug: detail

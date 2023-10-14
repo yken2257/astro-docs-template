@@ -1,3 +1,69 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+li {
+  display: list-item;
+}
+
+ol {
+  list-style: decimal;
+  padding-inline-start: 30px;
+}
+
+ul {
+  list-style: disc;
+  padding-inline-start: 30px;
+}
+
+/* 1階層下の ul */
+ul > li > ul {
+  list-style-type: circle; /* 円のマークを使用 */
+  padding-inline-start: 25px;
+}
+
+/* 2階層下の ul */
+ul > li > ul > li > ul {
+  list-style-type: square; /* 正方形のマークを使用 */
+  padding-inline-start: 25px;
+}
+
+@layer base {
+	body {
+		@apply p-5 leading-6 text-left break-words;
+	}
+	h1 {
+		@apply text-3xl font-bold text-gray-900 mt-6 mb-2;
+	}
+	h2 {
+		@apply text-2xl font-bold text-gray-900 mt-5 mb-2;
+	}
+	h3 {
+		@apply text-xl font-bold text-gray-900 mt-4 mb-1;
+	}
+	h4 {
+		@apply text-lg font-bold text-gray-900 mt-3 mb-1;
+	}
+	h5 {
+		@apply text-base font-bold text-gray-900 mt-2 mb-1;
+	}
+	h6 {
+		@apply text-sm font-bold text-gray-900 mt-1 mb-1;
+	}
+	pre {
+		@apply rounded-md my-2 px-3 py-2 text-sm;
+	}
+	a {
+		@apply text-blue-400;
+	}
+  :not(pre) > code {
+    @apply bg-indigo-50 px-1 py-0.5 mx-0.5 font-semibold text-gray-600 rounded-lg;
+		font-size: calc(var(--text-size, 1rem) * 0.9);
+  }
+  blockquote {
+    @apply p-2 mx-2 my-2 bg-gray-100 mb-4 border-l-4 border-gray-400 rounded;
+  }
+  blockquote > p {
+    @apply mb-0;
+  }
+}

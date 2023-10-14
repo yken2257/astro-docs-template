@@ -1,0 +1,96 @@
+---
+import type { TreeNode, TreeNodeValue } from "../utils";
+
+const node: TreeNode = Astro.props.node;
+const basePath: string = Astro.props.basePath || '';
+---
+
+{Object.entries(node).map(([key, value]) => {
+  const isTreeNodeValue = (val: string | TreeNodeValue): val is TreeNodeValue => typeof val !== 'string';
+  
+  let newPath: string;
+  let displayText: string;
+  let children: TreeNode | undefined;
+
+  if (isTreeNodeValue(value)) {
+    newPath = value.path;
+    displayText = value.text || key;
+    children = value.children;
+  } else {
+    newPath = value;
+    displayText = key;
+  }
+
+  if (typeof children === 'object') {
+    return (
+      <li>
+        <details open>
+          <summary class="flex items-center cursor-pointer">
+            {displayText}
+            <span class="ml-4">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 5l7 7-7 7"></path>
+              </svg>
+            </span>
+          </summary>
+          <ul>
+            <Astro.self node={children} basePath={newPath} />
+          </ul>
+        </details>
+      </li>
+    );
+  } else {
+    return (
+      <li>
+        <a href={newPath}>{displayText}</a>
+      </li>
+    );
+  }
+})}
+  
+  
+  <style>
+  li {
+    list-style: none;
+  }
+  
+  details > summary {
+    list-style: none;
+    font-weight: bold;
+  }
+  
+  details > summary::marker,
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+  
+  summary {
+    cursor: pointer;
+  }
+  
+  details[open] > summary svg {
+    transform: rotate(90deg);
+  }
+  
+  details > summary {
+      padding-inline-start: 0px;
+  }
+
+  details > ul {
+      padding-inline-start: 10px;
+  }
+  
+  details details > summary {
+      padding-inline-start: 0px;
+  }
+  details details > ul {
+    padding-inline-start: 10px;
+  }
+  
+  details details details > summary {
+      padding-inline-start: 0px;
+  }
+  details details details > ul {
+    padding-inline-start: 10px;
+  }
+  </style>
