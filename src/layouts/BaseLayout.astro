@@ -1,27 +1,8 @@
 ---
 import "./globals.css"
-import fs from 'fs';
-import * as path from 'path';
-import yaml from 'js-yaml';
-import type { NavItem } from "../utils";
-
-import LeftSideBar from "../components/LeftSideBar.astro";
 import TopNavigation from "../components/TopNavigation.astro";
 
 const { frontmatter } = Astro.props;
-
-function loadYAML(filepath: string) {
-  try {
-    const fileContents = fs.readFileSync(filepath, 'utf-8');
-    return yaml.load(fileContents);
-  } catch (e) {
-    console.error("Failed to load YAML file:", e);
-    return null;
-  }
-}
-const yamlPath = path.join(process.cwd(), 'src', 'path_names.yaml')
-const dataObj = loadYAML(yamlPath);
-
 ---
 
 <html lang="ja">
@@ -33,13 +14,6 @@ const dataObj = loadYAML(yamlPath);
 	</head>
 	<body>
     <TopNavigation/>
-    <div class="grid grid-cols-12">
-      <div class="col-start-0 col-span-3 mt-16">
-        <LeftSideBar pathObj={dataObj}/>
-      </div>
-      <article class="mt-16 col-start-4 col-end-11 max-w-none">
-          <slot />
-      </article>
-    </div>
+    <slot />
 	</body>
 </html>

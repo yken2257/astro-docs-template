@@ -1,9 +1,10 @@
 ---
-title: 'マニュアル>機能B>要素1の概要'
+title: '概要'
 description: 'Lorem ipsum dolor sit amet'
 pubDate: 'Jul 08 2022'
 ---
 
+## マニュアル>機能B>要素1の概要
 <div class="grid place-items-center content-center">
  <div class="py-2 px-4 bg-purple-500 text-white font-semibold rounded-lg shadow-md">
   Tailwind classes also work in Markdown!
@@ -15,8 +16,6 @@ pubDate: 'Jul 08 2022'
   Go home
  </a>
 </div>
-
-## マニュアル>機能B>要素1の概要
 
 Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
 

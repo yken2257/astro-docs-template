@@ -6,9 +6,7 @@ const postEntries = await getCollection('posts');
 const frontmatter = {
 	title: 'トップページ'
 };
-
 ---
-
 <BaseLayout frontmatter={frontmatter}>
 	<ul>
 		{postEntries.map(postEntry => (

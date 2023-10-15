@@ -1,6 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
+
+import fs from 'fs';
+import * as path from 'path';
+import yaml from 'js-yaml';
+import type { NavItem, BreadcrumbItem } from "../utils";
+import { convertToTree, generateBreadcrumb } from "../utils";
+
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LeftSideBar from "../components/LeftSideBar.astro";
+import Breadcrumb from '../components/Breadcrumb.astro';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('posts');
@@ -8,15 +17,31 @@ export async function getStaticPaths() {
     params: { slug: entry.slug }, props: { entry },
   }));
 }
-const blogEntries = await getCollection('posts');
-blogEntries.map((blogentry) => {
-  console.log(`${blogentry.slug}, ${blogentry.data.title}`)
+const entries = await getCollection('posts');
+entries.map((entry) => {
+  console.log(`${entry.slug}, ${entry.data.title}`)
 });
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
+function loadYAML(filepath: string): NavItem[] {
+  const fileContents = fs.readFileSync(filepath, 'utf-8');
+  return yaml.load(fileContents) as NavItem[];
+}
+const yamlPath = path.join(process.cwd(), 'src', 'path_names.yaml')
+const dataObj: NavItem[] = loadYAML(yamlPath);
+const tree = await convertToTree(dataObj);
+const breadcrumbParts: BreadcrumbItem[] = generateBreadcrumb(entry.slug, tree);
 ---
 <BaseLayout frontmatter={entry.data}>
-  <Content />  
+  <div class="grid grid-cols-12">
+    <div class="col-start-0 col-span-3 mt-16">
+      <LeftSideBar tree={tree}/>
+    </div>
+    <article class="mt-16 col-start-4 col-end-11 max-w-none">
+      <Breadcrumb breadcrumbParts={breadcrumbParts} />
+      <Content />  
+    </article>
+  </div>
 </BaseLayout>

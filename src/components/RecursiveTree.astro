@@ -47,31 +47,30 @@ const basePath: string = Astro.props.basePath || '';
     );
   }
 })}
-  
-  
-  <style>
+
+<style>
   li {
     list-style: none;
   }
-  
+
   details > summary {
     list-style: none;
     font-weight: bold;
   }
-  
+
   details > summary::marker,
   details > summary::-webkit-details-marker {
     display: none;
   }
-  
+
   summary {
     cursor: pointer;
   }
-  
+
   details[open] > summary svg {
     transform: rotate(90deg);
   }
-  
+
   details > summary {
       padding-inline-start: 0px;
   }
@@ -79,18 +78,18 @@ const basePath: string = Astro.props.basePath || '';
   details > ul {
       padding-inline-start: 10px;
   }
-  
+
   details details > summary {
       padding-inline-start: 0px;
   }
   details details > ul {
     padding-inline-start: 10px;
   }
-  
+
   details details details > summary {
       padding-inline-start: 0px;
   }
   details details details > ul {
     padding-inline-start: 10px;
   }
-  </style>
+</style>

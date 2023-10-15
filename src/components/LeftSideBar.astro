@@ -1,10 +1,7 @@
 ---
-import type { NavItem } from "../utils";
-import { convertToTree } from "../utils";
 import RecursiveTree from "./RecursiveTree.astro";
 
-const data: NavItem[] = Astro.props.pathObj;
-const tree = await convertToTree(data);
+const tree = Astro.props.tree;
 ---
 <ul>
     <RecursiveTree node={tree} basePath="" />

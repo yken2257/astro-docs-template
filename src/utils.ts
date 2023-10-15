@@ -16,9 +16,10 @@ export type NavItem = {
     items?: NavItem[];
 };
 
-function isTreeNodeValue(value: string | TreeNodeValue): value is TreeNodeValue {
-  return typeof value !== 'string';
-}
+export type BreadcrumbItem = {
+  text: string;
+  url: string;
+};
 
 export async function convertToTree(data: NavItem[]): Promise<TreeNode> {
   const tree: TreeNode = {};
@@ -59,4 +60,43 @@ export async function convertToTree(data: NavItem[]): Promise<TreeNode> {
 
   recurse(data, tree);
   return tree;
+}
+
+function isTreeNodeValue(value: any): value is TreeNodeValue {
+  return typeof value === 'object' && 'path' in value;
+}
+
+export function generateBreadcrumb(url: string, tree: TreeNode): BreadcrumbItem[] {
+  const parts = url.split('/').filter(p => p);
+  let breadcrumbParts: BreadcrumbItem[] = [];
+  let currentLevel: TreeNode | undefined = tree;
+  let currentPath = "";
+
+  for (const part of parts) {
+    currentPath += `/${part}`;
+    const node: string | TreeNodeValue | undefined = currentLevel && currentLevel[part];
+    if (isTreeNodeValue(node) && node.text) {
+      let linkUrl = currentPath;
+
+      // Check for an "index.html" child and update the URL if found
+      if (node.children && node.children["index.html"]) {
+        linkUrl += "/index.html";
+      }
+
+      breadcrumbParts.push({
+        text: node.text,
+        url: linkUrl
+      });
+
+      currentLevel = node.children;
+    } else {
+      currentLevel = undefined;
+    }
+  }
+  breadcrumbParts.unshift({
+    text: 'HOME',
+    url: '/'
+  });
+
+  return breadcrumbParts;
 }

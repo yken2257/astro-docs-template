@@ -1,0 +1,17 @@
+---
+import type { BreadcrumbItem } from "../utils";
+const breadcrumbParts: BreadcrumbItem[] = Astro.props.breadcrumbParts;
+---
+
+<div class="breadcrumb">
+  {breadcrumbParts.map((item, index) => (
+    <>
+      {index > 0 && " / "}
+      {item.url.endsWith('/index.html') || item.text === 'HOME' ? (
+        <a href={item.url}>{item.text}</a>
+      ) : (
+        <span>{item.text}</span>
+      )}
+    </>
+  ))}
+</div>
