@@ -27,7 +27,27 @@ ul > li > ul > li > ul {
   list-style-type: square; /* 正方形のマークを使用 */
   padding-inline-start: 25px;
 }
-
+table {
+  margin: 1.2rem auto;
+  width: auto;
+  border-collapse: collapse;
+  font-size: 0.95em;
+  line-height: 1.5;
+  word-break: normal;
+  display: block;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+th,
+td {
+  padding: 0.5rem;
+  border: solid 1px;
+  background: #fff;
+}
+th {
+  font-weight: 700;
+  background: #ddd;
+}
 @layer base {
 	body {
 		@apply p-5 leading-6 text-left break-words;
